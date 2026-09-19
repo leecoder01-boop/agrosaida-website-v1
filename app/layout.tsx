@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import { Fraunces, Manrope } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 
-const display = Fraunces({
+const display = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
-  axes: ["SOFT", "WONK"],
 });
 
-const body = Manrope({
+const body = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import MagneticButton from "./MagneticButton";
 
@@ -19,6 +19,16 @@ export default function HeroTransition({
   const titleText = useRef<HTMLHeadingElement>(null);
   const [, setVideoReadyState] = useState(false);
   const taglineRef = useRef<HTMLParagraphElement>(null);
+  // escolhe o vídeo conforme a tela (1,8MB no mobile, 5,5MB no desktop)
+  const [videoSrc, setVideoSrc] = useState("/videos/agrosaida-hero-desktop.mp4");
+
+  useEffect(() => {
+    setVideoSrc(
+      window.innerWidth < 768
+        ? "/videos/agrosaida-hero-mobile.mp4"
+        : "/videos/agrosaida-hero-desktop.mp4"
+    );
+  }, []);
 
   // notify preloader about video metadata
   useLayoutEffect(() => {
@@ -91,7 +101,7 @@ export default function HeroTransition({
           preload="auto"
           poster="/images/_base-placeholder.svg"
         >
-          <source src="/videos/agrosaida-hero.mp4" type="video/mp4" />
+          <source src={videoSrc} type="video/mp4" />
         </video>
         <div className="hero-overlay absolute inset-0 bg-ink/45" />
 
