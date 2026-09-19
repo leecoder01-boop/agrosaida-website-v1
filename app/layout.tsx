@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
+import { Sora, Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/SmoothScrollProvider";
 
-const display = Space_Grotesk({
+const display = Sora({
   subsets: ["latin"],
+  weight: ["800"],
   variable: "--font-display",
   display: "swap",
 });
 
-const body = Space_Grotesk({
+const body = Inter({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",

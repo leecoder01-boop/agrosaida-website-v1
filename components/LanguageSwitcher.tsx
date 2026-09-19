@@ -83,9 +83,9 @@ export default function LanguageSwitcher() {
 
   return (
     <div data-no-translate className="absolute right-0 top-[calc(100%+8px)] flex gap-1.5 rounded-full border border-white/15 bg-[#07110b]/95 p-1.5 shadow-xl backdrop-blur-md" aria-label="Idioma">
-      {([['pt', '🇧🇷', 'Português'], ['es', '🇪🇸', 'Español'], ['en', '🇺🇸', 'English']] as const).map(([code, flag, label]) => (
-        <button key={code} type="button" onClick={() => choose(code)} title={label} aria-label={label} className={`flex h-8 w-10 items-center justify-center rounded-full text-base transition ${lang === code ? "bg-[#4a7c38] scale-105" : "hover:bg-white/10"}`}>
-          {flag}
+      {([['pt', 'BR', 'Português'], ['es', 'ES', 'Español'], ['en', 'EN', 'English']] as const).map(([code, code2, label]) => (
+        <button key={code} type="button" onClick={() => choose(code)} title={label} aria-label={label} className={`flex h-8 w-10 items-center justify-center rounded-full text-[11px] font-semibold tracking-[0.14em] text-paper transition ${lang === code ? "bg-[#4a7c38] scale-105" : "hover:bg-white/10"}`}>
+          {code2}
         </button>
       ))}
     </div>
