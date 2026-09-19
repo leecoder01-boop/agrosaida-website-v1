@@ -5,7 +5,9 @@
       "Bash(git commit *)",
       "Bash(git push *)",
       "Bash(npm run *)",
-      "Bash(gh run *)"
+      "Bash(gh run *)",
+      "Bash(mkdir -p ~/agrosaida-hello)",
+      "Read(//c/Users/cleit/**)"
     ]
   }
 }
