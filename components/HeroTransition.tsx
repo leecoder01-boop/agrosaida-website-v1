@@ -17,7 +17,7 @@ export default function HeroTransition({
   const videoRef = useRef<HTMLVideoElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
   const titleText = useRef<HTMLHeadingElement>(null);
-  const [videoReady, setVideoReadyState] = useState(false);
+  const [, setVideoReadyState] = useState(false);
   const taglineRef = useRef<HTMLParagraphElement>(null);
 
   // notify preloader about video metadata
@@ -46,51 +46,27 @@ export default function HeroTransition({
     return () => io.disconnect();
   }, []);
 
-  // keep the video parked low + title hidden until the preloader finishes
+  // Prepare the hero copy behind the preloader, without tying it to scroll.
   useLayoutEffect(() => {
-    if (start) return;
-    gsap.set(videoRef.current, { y: "16%", scale: 1.12 });
+    gsap.set(videoRef.current, { y: "0%", scale: 1 });
+    gsap.set(titleRef.current, { clipPath: "inset(0% 0% 14% 0%)" });
     gsap.set(titleText.current, {
       opacity: 0,
-      y: 180,
-      filter: "blur(12px)",
-      letterSpacing: "0.28em",
+      y: 26,
+      filter: "blur(3px)",
+      letterSpacing: "0.08em",
     });
-    gsap.set(taglineRef.current, { opacity: 0, y: 30 });
-  }, [start]);
+    gsap.set(taglineRef.current, { opacity: 0, y: 14 });
+  }, []);
 
-  // camera rises + title is born from the bottom, starting right after the preloader
+  // Reveal once, just after the loading curtain starts opening.
   useLayoutEffect(() => {
     if (!start) return;
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ delay: 0.2 });
-      tl.fromTo(
-        videoRef.current,
-        { y: "16%", scale: 1.12 },
-        { y: "0%", scale: 1, duration: 2.4, ease: "power3.out" }
-      ).fromTo(
-        titleText.current,
-        {
-          opacity: 0,
-          y: 180,
-          filter: "blur(12px)",
-          letterSpacing: "0.28em",
-        },
-        {
-          opacity: 1,
-          y: 0,
-          filter: "blur(0px)",
-          letterSpacing: "0.08em",
-          duration: 1.8,
-          ease: "power4.out",
-        },
-        0.35
-      ).fromTo(
-        taglineRef.current,
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 1.4, ease: "power3.out" },
-        0.7
-      );
+      gsap.timeline({ delay: 0.24 })
+        .to(titleRef.current, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.78, ease: "power3.out" }, 0)
+        .to(titleText.current, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.82, ease: "power3.out" }, 0)
+        .to(taglineRef.current, { opacity: 1, y: 0, duration: 0.62, ease: "power2.out" }, 0.28);
     }, wrapperRef);
 
     return () => ctx.revert();
@@ -103,7 +79,7 @@ export default function HeroTransition({
 
   return (
     <div ref={wrapperRef} className="relative h-screen overflow-hidden bg-ink">
-      <section className="hero-transition relative h-screen w-full">
+      <section id="hero" className="hero-transition relative h-screen w-full">
         {/* drone video — 16:9, fills the screen with object-cover, no visible zoom */}
         <video
           ref={videoRef}
@@ -121,19 +97,23 @@ export default function HeroTransition({
 
         {/* AGROSAIDA title with looping mask */}
         <div className="absolute inset-0 flex items-center justify-center px-6">
-          <div ref={titleRef} className="text-container relative flex flex-col items-center gap-3 md:gap-4">
+          <div
+            ref={titleRef}
+            className="text-container relative flex flex-col items-center gap-3 overflow-hidden md:gap-4"
+            style={{ clipPath: "inset(0% 0% 14% 0%)" }}
+          >
             <h1
               ref={titleText}
               className="hero-title font-display font-semibold text-paper text-[6vw] md:text-[5vw] lg:text-[4vw] leading-[1] tracking-[0.08em] select-none will-change-transform whitespace-nowrap"
               style={{
                 opacity: 0,
-                transform: "translateY(180px)",
-                filter: "blur(12px)",
-                letterSpacing: "0.28em",
+                transform: "translateY(26px)",
+                filter: "blur(3px)",
+                letterSpacing: "0.08em",
               }}
             >
-              <span className="sr-only">AGROSAIDA</span>
-              AGROSAIDA
+              <span className="sr-only">AGROSAÍDA</span>
+              AGROSAÍDA
             </h1>
             <p ref={taglineRef} className="tagline font-display font-semibold text-[#d5a85a] text-[3.5vw] md:text-[2.8vw] lg:text-[2vw] tracking-[0.18em] opacity-0 will-change-transform">
               DA TERRA NASCE O FUTURO

@@ -3,11 +3,12 @@
 import gsap from "gsap";
 
 import { useEffect, useRef } from "react";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const LINKS = [
   { label: "Sobre", href: "#sobre" },
   { label: "Soluções", href: "#solucoes" },
-  { label: "Atuação", href: "#atuacao" },
+  { label: "Catálogo", href: "#racoes" },
   { label: "Contato", href: "#contato" },
 ];
 
@@ -83,9 +84,12 @@ export default function Header({ visible }: { visible: boolean }) {
             </li>
           ))}
         </ul>
-        <a href="#contato" className="hd-cta group relative inline-flex items-center px-6 py-2.5 rounded-full border border-paper/25 text-[13px] tracking-[0.14em] uppercase text-paper transition-colors duration-500 hover:border-gold hover:text-gold">
-          Fale conosco
-        </a>
+        <div className="relative">
+          <a href="https://wa.me/553432311843" target="_blank" rel="noopener noreferrer" className="hd-cta group relative inline-flex items-center rounded-full border border-[#6fa85a] bg-[#4a7c38] px-6 py-2.5 text-[13px] uppercase tracking-[0.14em] text-[#f2ead6] transition-all duration-300 hover:bg-[#5a9146] hover:shadow-[0_0_22px_rgba(74,124,56,0.45)]">
+            WhatsApp
+          </a>
+          <LanguageSwitcher />
+        </div>
       </nav>
     </header>
   );

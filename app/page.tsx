@@ -7,6 +7,8 @@ import HeroTransition from "@/components/HeroTransition";
 import AboutSection from "@/components/AboutSection";
 import AbasSection from "@/components/AbasSection";
 import CarouselsSection from "@/components/CarouselsSection";
+import ContactSection from "@/components/ContactSection";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
@@ -18,12 +20,14 @@ export default function Home() {
 
   return (
     <main>
-      <Preloader onComplete={onPreloaderComplete} videoReady={videoReady} />
+      <Preloader onComplete={onPreloaderComplete} />
       <Header visible={loaded} />
+      <FloatingWhatsApp />
       <HeroTransition onVideoReady={onVideoReady} setNextSection={setActiveSection} start={loaded} />
       <AboutSection />
       <AbasSection />
       <CarouselsSection />
+      <ContactSection />
     </main>
   );
 }

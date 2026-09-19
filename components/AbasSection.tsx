@@ -11,78 +11,97 @@ const CARDS = [
     eyebrow: "01",
     title: "[TÍTULO]",
     desc: "[Descrição da prateleira — conteúdo real a ser fornecido pela Agrosaida. Foto real em breve.]",
-    src: "/images/abas-01.png",
+    src: "/images/store/prateleira-medicamentos.png",
   },
   {
     eyebrow: "02",
     title: "[TÍTULO]",
     desc: "[Descrição da prateleira — conteúdo real a ser fornecido pela Agrosaida. Foto real em breve.]",
-    src: "/images/abas-02.png",
+    src: "/images/store/racoes-e-ferramentas.png",
   },
   {
     eyebrow: "03",
     title: "[TÍTULO]",
     desc: "[Descrição da prateleira — conteúdo real a ser fornecido pela Agrosaida. Foto real em breve.]",
-    src: "/images/abas-03.png",
+    src: "/images/store/racoes-a-granel.png",
   },
   {
     eyebrow: "04",
     title: "[TÍTULO]",
     desc: "[Descrição da prateleira — conteúdo real a ser fornecido pela Agrosaida. Foto real em breve.]",
-    src: "/images/abas-04.png",
-  },
-  {
-    eyebrow: "05",
-    title: "[TÍTULO]",
-    desc: "[Descrição da prateleira — conteúdo real a ser fornecido pela Agrosaida. Foto real em breve.]",
-    src: "/images/abas-05.png",
+    src: "/images/store/acessorios-e-utilidades.png",
   },
 ];
 
 export default function AbasSection() {
   const root = useRef<HTMLElement>(null);
-  const cardRefs = useRef<(HTMLElement | null)[]>([]);
+  const backgroundRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
-    if (!root.current) return;
     const ctx = gsap.context(() => {
-      // cards staggered reveal when section enters viewport
-      gsap.fromTo(
-        ".abas-card",
-        { y: 60, opacity: 0, scale: 0.96 },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.9,
-          stagger: 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: root.current,
-            start: "top 75%",
-          },
-        }
-      );
-    }, root.current);
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (reduceMotion) {
+        gsap.set(backgroundRef.current, { scale: 1 });
+        gsap.set(root.current, { clipPath: "inset(0% 0% 0% 0%)" });
+        gsap.set([".abas-title", ".abas-heading", ".abas-card"], { opacity: 1, y: 0, scale: 1 });
+        return;
+      }
+
+      gsap.fromTo(backgroundRef.current, { scale: 1.12 }, {
+        scale: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: root.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 0.8,
+        },
+      });
+
+      const reveal = gsap.timeline({
+        scrollTrigger: {
+          trigger: root.current,
+          start: "top 86%",
+          toggleActions: "play none restart reverse",
+        },
+      });
+      reveal
+        .fromTo(root.current, { clipPath: "inset(10% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.72, ease: "power3.out" }, 0)
+        .fromTo(".abas-title", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" }, 0.08)
+        .fromTo(".abas-heading", { y: 70, opacity: 0 }, { y: 0, opacity: 1, duration: 0.78, ease: "power3.out" }, 0.12)
+        .fromTo(".abas-card", { y: 34, opacity: 0 }, { y: 0, opacity: 1, duration: 0.62, stagger: 0.12, ease: "power3.out" }, 0.28);
+    }, root);
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={root} className="relative bg-paper min-h-screen flex items-center px-6 md:px-10 lg:px-[8vw] py-[12vh]">
-      <div className="absolute inset-x-0 top-0 h-px bg-deep/10" aria-hidden="true" />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-10">
+    <section ref={root} id="solucoes" className="relative isolate min-h-screen overflow-hidden bg-[#07110b] px-6 py-[12vh] md:px-10 lg:px-[8vw]">
+      <div
+        ref={backgroundRef}
+        className="absolute inset-0 -z-30 h-full w-full bg-cover bg-center bg-no-repeat will-change-transform"
+        style={{ backgroundImage: "url('/images/backgrounds/lavoura-brasil.jpg')" }}
+        aria-hidden="true"
+      />
+      <div className="absolute inset-0 -z-20 bg-[linear-gradient(105deg,rgba(2,10,6,0.90)_0%,rgba(7,27,16,0.78)_52%,rgba(2,11,7,0.58)_100%)] md:bg-[linear-gradient(105deg,rgba(2,10,6,0.82)_0%,rgba(7,27,16,0.68)_52%,rgba(2,11,7,0.42)_100%)]" aria-hidden="true" />
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(3,14,8,0.10),rgba(3,14,8,0.38))]" aria-hidden="true" />
+      <div className="relative mx-auto max-w-7xl">
+        <div className="mb-10 max-w-2xl md:mb-14">
+          <span className="abas-title eyebrow text-[#d5a85a]">MINI CATÁLOGO</span>
+          <h2 className="abas-heading mt-4 font-display text-3xl leading-[1.08] text-[#f2ead6] [text-shadow:0_3px_24px_rgba(0,0,0,0.45)] md:text-5xl">
+            Soluções para cada rotina no campo.
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-4 lg:gap-10">
         {CARDS.map((card, i) => (
           <article
             key={i}
-            ref={(el) => {
-              cardRefs.current[i] = el;
-            }}
-            className="abas-card group relative overflow-hidden bg-deep/5 rounded-sm"
+            className="abas-card group relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#102619]/90 shadow-[0_18px_42px_-22px_rgba(0,0,0,0.8)] backdrop-blur-[2px]"
           >
             <div className="aspect-[16/10] overflow-hidden bg-sand/20">
               <img
                 src={card.src}
-                alt={`Imagem da prateleira ${card.eyebrow} (placeholder)`}
+                alt={`Prateleira ${card.eyebrow} da loja Agrosaida`}
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 will-change-transform"
               />
             </div>
@@ -93,6 +112,7 @@ export default function AbasSection() {
             </div>
           </article>
         ))}
+        </div>
       </div>
     </section>
   );

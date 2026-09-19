@@ -93,7 +93,8 @@ export default function Gallery() {
           const base = 1;
           pos -= (base + Math.abs(speed.current)) * 0.6;
           if (speed.current < 0) pos += Math.abs(speed.current) * 1.2;
-          const w = (marqueeInner.current?.scrollWidth ?? 0) / 2;
+          const inner = marqueeInner.current;
+          const w = inner ? inner.scrollWidth / 2 : 0;
           if (w > 0) {
             if (pos <= -w) pos += w;
             if (pos > 0) pos -= w;
