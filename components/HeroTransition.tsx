@@ -10,7 +10,7 @@ export default function HeroTransition({
   start,
 }: {
   onVideoReady?: () => void;
-  setNextSection: (section: string) => void;
+  setNextSection: (section: "hero" | "abas") => void;
   start?: boolean;
 }) {
   const wrapperRef = useRef<HTMLDivElement>(null);

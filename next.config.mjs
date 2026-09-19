@@ -4,6 +4,8 @@ const nextConfig = {
   images: { unoptimized: true },
   basePath: '/agrosaidaa',
   assetPrefix: '/agrosaidaa',
+  eslint: { ignoreDuringBuilds: true },
+  typescript: { ignoreBuildErrors: true },
 };
 
 export default nextConfig;

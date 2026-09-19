@@ -41,9 +41,10 @@ const CARDS = [
 
 export default function AbasSection() {
   const root = useRef<HTMLElement>(null);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const cardRefs = useRef<(HTMLElement | null)[]>([]);
 
   useLayoutEffect(() => {
+    if (!root.current) return;
     const ctx = gsap.context(() => {
       // cards staggered reveal when section enters viewport
       gsap.fromTo(
@@ -73,7 +74,9 @@ export default function AbasSection() {
         {CARDS.map((card, i) => (
           <article
             key={i}
-            ref={(el) => (cardRefs.current[i] = el)}
+            ref={(el) => {
+              cardRefs.current[i] = el;
+            }}
             className="abas-card group relative overflow-hidden bg-deep/5 rounded-sm"
           >
             <div className="aspect-[16/10] overflow-hidden bg-sand/20">
