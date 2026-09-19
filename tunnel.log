@@ -1,0 +1,61 @@
+2026-09-18T17:54:28Z INF Thank you for trying Cloudflare Tunnel. Doing so, without a Cloudflare account, is a quick way to experiment and try it out. However, be aware that these account-less Tunnels have no uptime guarantee, are subject to the Cloudflare Online Services Terms of Use (https://www.cloudflare.com/website-terms/), and Cloudflare reserves the right to investigate your use of Tunnels for violations of such terms. If you intend to use Tunnels in production you should use a pre-created named tunnel by following: https://developers.cloudflare.com/cloudflare-one/connections/connect-apps
+2026-09-18T17:54:28Z INF Requesting new quick Tunnel on trycloudflare.com...
+2026-09-18T17:54:34Z INF +--------------------------------------------------------------------------------------------+
+2026-09-18T17:54:34Z INF |  Your quick Tunnel has been created! Visit it at (it may take some time to be reachable):  |
+2026-09-18T17:54:34Z INF |  https://every-earliest-delaware-treo.trycloudflare.com                                    |
+2026-09-18T17:54:34Z INF +--------------------------------------------------------------------------------------------+
+2026-09-18T17:54:34Z INF Cannot determine default configuration path. No file [config.yml config.yaml] in [~/.cloudflared ~/.cloudflare-warp ~/cloudflare-warp]
+2026-09-18T17:54:34Z INF Version 2026.9.1 (Checksum 2837888cc0f5d58f15b6dc478376de90b4d3ba5241c7947455d1e0a0df429712)
+2026-09-18T17:54:34Z INF GOOS: windows, GOVersion: go1.26.8, GoArch: amd64
+2026-09-18T17:54:34Z INF Settings: map[ha-connections:1 protocol:quic url:http://localhost:3000]
+2026-09-18T17:54:34Z INF cloudflared will not automatically update on Windows systems.
+2026-09-18T17:54:34Z INF Generated Connector ID: bcf95b15-98d0-4781-8840-78fd7deaf66d
+2026-09-18T17:54:34Z INF Initial protocol quic
+2026-09-18T17:54:34Z INF ICMP proxy will use 192.168.100.37 as source for IPv4
+2026-09-18T17:54:34Z INF ICMP proxy will use ::1 in zone Loopback Pseudo-Interface 1 as source for IPv6
+2026-09-18T17:54:34Z INF cloudflared does not support loading the system root certificate pool on Windows. Please use --origin-ca-pool <PATH> to specify the path to the certificate pool
+2026-09-18T17:54:34Z INF ICMP proxy will use 192.168.100.37 as source for IPv4
+2026-09-18T17:54:34Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveID(65074) CurveP256] connIndex=0 event=0 ip=198.41.192.37
+2026-09-18T17:54:34Z INF ICMP proxy will use ::1 in zone Loopback Pseudo-Interface 1 as source for IPv6
+2026-09-18T17:54:34Z INF Starting metrics server on 127.0.0.1:20241/metrics
+2026-09-18T17:54:34Z INF +-------------------------------------------------------------------------------------+
+2026-09-18T17:54:34Z INF |                               CONNECTIVITY PRE-CHECKS                               |
+2026-09-18T17:54:34Z INF +-------------------------------------------------------------------------------------+
+2026-09-18T17:54:34Z INF |  COMPONENT         TARGET                     STATUS  DETAILS                       |
+2026-09-18T17:54:34Z INF |  DNS Resolution    region1.v2.argotunnel.com  PASS    DNS Resolved successfully     |
+2026-09-18T17:54:34Z INF |  DNS Resolution    region2.v2.argotunnel.com  PASS    DNS Resolved successfully     |
+2026-09-18T17:54:34Z INF |  UDP Connectivity  region1.v2.argotunnel.com  PASS    QUIC connection successful    |
+2026-09-18T17:54:34Z INF |  UDP Connectivity  region2.v2.argotunnel.com  PASS    QUIC connection successful    |
+2026-09-18T17:54:34Z INF |  TCP Connectivity  region1.v2.argotunnel.com  PASS    HTTP/2 connection successful  |
+2026-09-18T17:54:34Z INF |  TCP Connectivity  region2.v2.argotunnel.com  PASS    HTTP/2 connection successful  |
+2026-09-18T17:54:34Z INF |  Cloudflare API    api.cloudflare.com:443     PASS    API is reachable              |
+2026-09-18T17:54:34Z INF |                                                                                     |
+2026-09-18T17:54:34Z INF |  SUMMARY: Environment is healthy. cloudflared will use 'quic' as primary protocol.  |
+2026-09-18T17:54:34Z INF +-------------------------------------------------------------------------------------+
+2026-09-18T17:54:34Z INF precheck component="DNS Resolution" details="DNS Resolved successfully" run_id=12b3be01-e2dd-419e-bfc3-60974777d30d status=pass target=region1.v2.argotunnel.com
+2026-09-18T17:54:34Z INF precheck component="DNS Resolution" details="DNS Resolved successfully" run_id=12b3be01-e2dd-419e-bfc3-60974777d30d status=pass target=region2.v2.argotunnel.com
+2026-09-18T17:54:34Z INF precheck component="UDP Connectivity" details="QUIC connection successful" run_id=12b3be01-e2dd-419e-bfc3-60974777d30d status=pass target=region1.v2.argotunnel.com
+2026-09-18T17:54:34Z INF precheck component="UDP Connectivity" details="QUIC connection successful" run_id=12b3be01-e2dd-419e-bfc3-60974777d30d status=pass target=region2.v2.argotunnel.com
+2026-09-18T17:54:34Z INF precheck component="TCP Connectivity" details="HTTP/2 connection successful" run_id=12b3be01-e2dd-419e-bfc3-60974777d30d status=pass target=region1.v2.argotunnel.com
+2026-09-18T17:54:34Z INF precheck component="TCP Connectivity" details="HTTP/2 connection successful" run_id=12b3be01-e2dd-419e-bfc3-60974777d30d status=pass target=region2.v2.argotunnel.com
+2026-09-18T17:54:34Z INF precheck component="Cloudflare API" details="API is reachable" run_id=12b3be01-e2dd-419e-bfc3-60974777d30d status=pass target=api.cloudflare.com:443
+2026-09-18T17:54:34Z INF precheck complete hard_fail=false run_id=12b3be01-e2dd-419e-bfc3-60974777d30d suggested_protocol=quic
+2026-09-18T17:54:35Z INF Registered tunnel connection connIndex=0 connection=e2b5ee0e-edee-4b64-85df-63c366e1beb0 event=0 ip=198.41.192.37 location=gru20 protocol=quic
+2026-09-18T17:57:32Z ERR  error="write udp [::]:50143->198.41.192.37:7844: wsasendto: Uma operação em um soquete não pôde ser executada porque o sistema não tinha espaço suficiente no buffer ou porque uma fila estava cheia." connIndex=0 event=1 ingressRule=0 originService=http://localhost:3000
+2026-09-18T17:57:32Z ERR  error="write udp [::]:50143->198.41.192.37:7844: wsasendto: Uma operação em um soquete não pôde ser executada porque o sistema não tinha espaço suficiente no buffer ou porque uma fila estava cheia." connIndex=0 event=1 ingressRule=0 originService=http://localhost:3000
+2026-09-18T17:57:32Z ERR Request failed error="write udp [::]:50143->198.41.192.37:7844: wsasendto: Uma operação em um soquete não pôde ser executada porque o sistema não tinha espaço suficiente no buffer ou porque uma fila estava cheia." connIndex=0 dest=https://every-earliest-delaware-treo.trycloudflare.com/_next/static/chunks/main-app.js?v=1789754252395 event=0 ip=198.41.192.37 type=http
+2026-09-18T17:57:32Z ERR Serve tunnel error error="datagram manager error: write udp [::]:50143->198.41.192.37:7844: wsasendto: Uma operação em um soquete não pôde ser executada porque o sistema não tinha espaço suficiente no buffer ou porque uma fila estava cheia." connIndex=0 event=0 ip=198.41.192.37
+2026-09-18T17:57:32Z INF Retrying connection in up to 1s connIndex=0 event=0 ip=198.41.192.37
+2026-09-18T17:57:32Z ERR Request failed error="write udp [::]:50143->198.41.192.37:7844: wsasendto: Uma operação em um soquete não pôde ser executada porque o sistema não tinha espaço suficiente no buffer ou porque uma fila estava cheia." connIndex=0 dest=https://every-earliest-delaware-treo.trycloudflare.com/videos/agrosaida-hero.mp4 event=0 ip=198.41.192.37 type=http
+2026-09-18T17:57:34Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveID(65074) CurveP256] connIndex=0 event=0 ip=198.41.192.37
+2026-09-18T17:57:34Z INF Registered tunnel connection connIndex=0 connection=e4bb7a5a-19aa-4474-b116-45dcb228f2fe event=0 ip=198.41.192.37 location=gru20 protocol=quic
+2026-09-18T18:04:18Z ERR  error="stream 145 canceled by remote with error code 0" connIndex=0 event=1 ingressRule=0 originService=http://localhost:3000
+2026-09-18T18:04:18Z ERR Request failed error="stream 145 canceled by remote with error code 0" connIndex=0 dest=https://every-earliest-delaware-treo.trycloudflare.com/videos/agrosaida-hero.mp4 event=0 ip=198.41.192.37 type=http
+2026-09-18T18:15:02Z ERR Serve tunnel error error="accept stream listener error: failed to accept QUIC stream: write udp [::]:50143->198.41.192.37:7844: wsasendto: Uma operação em um soquete não pôde ser executada porque o sistema não tinha espaço suficiente no buffer ou porque uma fila estava cheia." connIndex=0 event=0 ip=198.41.192.37
+2026-09-18T18:15:02Z INF Retrying connection in up to 1s connIndex=0 event=0 ip=198.41.192.37
+2026-09-18T18:15:02Z ERR  error="write udp [::]:50143->198.41.192.37:7844: wsasendto: Uma operação em um soquete não pôde ser executada porque o sistema não tinha espaço suficiente no buffer ou porque uma fila estava cheia." connIndex=0 event=1 ingressRule=0 originService=http://localhost:3000
+2026-09-18T18:15:02Z ERR Request failed error="write udp [::]:50143->198.41.192.37:7844: wsasendto: Uma operação em um soquete não pôde ser executada porque o sistema não tinha espaço suficiente no buffer ou porque uma fila estava cheia." connIndex=0 dest=https://every-earliest-delaware-treo.trycloudflare.com/videos/agrosaida-hero.mp4 event=0 ip=198.41.192.37 type=http
+2026-09-18T18:15:03Z INF Tunnel connection curve preferences: [X25519MLKEM768 CurveID(65074) CurveP256] connIndex=0 event=0 ip=198.41.192.37
+2026-09-18T18:15:04Z INF Registered tunnel connection connIndex=0 connection=40e7b360-a7e9-4bec-9de9-32e996d636c5 event=0 ip=198.41.192.37 location=gru20 protocol=quic
+2026-09-18T18:26:10Z ERR  error="stream 133 canceled by remote with error code 0" connIndex=0 event=1 ingressRule=0 originService=http://localhost:3000
+2026-09-18T18:26:10Z ERR Request failed error="stream 133 canceled by remote with error code 0" connIndex=0 dest=https://every-earliest-delaware-treo.trycloudflare.com/videos/agrosaida-hero.mp4 event=0 ip=198.41.192.37 type=http
