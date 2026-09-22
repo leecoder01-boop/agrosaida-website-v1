@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -38,6 +38,7 @@ export default function CarouselSection({
 }: Props) {
   const rootRef = useRef<HTMLElement>(null);
   const backgroundRef = useRef<HTMLDivElement>(null);
+  const shelfRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const animatingRef = useRef(false);
   const [index, setIndex] = useState(0);
@@ -55,9 +56,22 @@ export default function CarouselSection({
     const card = track.querySelector<HTMLElement>(".carousel-card");
     if (!card) return;
     const step = card.offsetWidth + 24; // card width + gap
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (isMobile) {
+      shelfRef.current?.scrollTo({
+        left: clamped * step,
+        behavior: reduceMotion ? "auto" : "smooth",
+      });
+      setIndex(clamped);
+      setCanPrev(clamped > 0);
+      setCanNext(clamped < maxIndex);
+      return;
+    }
+
     const direction = clamped > index ? 1 : -1;
     const cards = track.querySelectorAll<HTMLElement>(".carousel-card");
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (isPremium && !reduceMotion) {
       animatingRef.current = true;
@@ -104,6 +118,33 @@ export default function CarouselSection({
     setCanPrev(clamped > 0);
     setCanNext(clamped < maxIndex);
   };
+
+  useEffect(() => {
+    const shelf = shelfRef.current;
+    const track = trackRef.current;
+    if (!shelf || !track) return;
+
+    let frame = 0;
+    const syncIndex = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        if (!window.matchMedia("(max-width: 767px)").matches) return;
+        const card = track.querySelector<HTMLElement>(".carousel-card");
+        if (!card) return;
+        const step = card.offsetWidth + 24;
+        const nextIndex = Math.min(maxIndex, Math.max(0, Math.round(shelf.scrollLeft / step)));
+        setIndex(nextIndex);
+        setCanPrev(nextIndex > 0);
+        setCanNext(nextIndex < maxIndex);
+      });
+    };
+
+    shelf.addEventListener("scroll", syncIndex, { passive: true });
+    return () => {
+      cancelAnimationFrame(frame);
+      shelf.removeEventListener("scroll", syncIndex);
+    };
+  }, [maxIndex]);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -219,12 +260,15 @@ export default function CarouselSection({
         </div>
 
         {/* carousel */}
-        <div className={`carousel-shelf mt-14 origin-top overflow-hidden ${isPremium ? "group/shelf" : ""}`}>
-          <div ref={trackRef} className="flex gap-6 will-change-transform">
+        <div
+          ref={shelfRef}
+          className={`carousel-shelf mt-14 origin-top overflow-x-auto overscroll-x-contain scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:overflow-hidden md:snap-none ${isPremium ? "group/shelf" : ""}`}
+        >
+          <div ref={trackRef} className="flex w-max gap-6 pr-6 will-change-transform md:w-auto md:pr-0">
             {products.map((p) => (
               <article
                 key={p.name}
-                className={`carousel-card group relative shrink-0 w-[80vw] sm:w-[380px] md:w-[420px] flex flex-col overflow-hidden border border-[#b9c7a8]/12 bg-[#122415]/80 shadow-[0_18px_48px_-20px_rgba(0,0,0,0.75)] transition-[transform,box-shadow,border-color,opacity] duration-500 will-change-transform ${
+                className={`carousel-card group relative shrink-0 w-[80vw] snap-start sm:w-[380px] md:w-[420px] md:snap-none flex flex-col overflow-hidden border border-[#b9c7a8]/12 bg-[#122415]/80 shadow-[0_18px_48px_-20px_rgba(0,0,0,0.75)] transition-[transform,box-shadow,border-color,opacity] duration-500 will-change-transform ${
                   isPremium
                     ? "rounded-[1.75rem] group-hover/shelf:opacity-70 hover:!opacity-100 hover:-translate-y-1.5 hover:scale-[1.01] hover:border-[#6fa85a]/70 hover:shadow-[0_24px_54px_-22px_rgba(74,124,56,0.42)]"
                     : "rounded-xl hover:-translate-y-2 hover:border-[#d5a85a]/50 hover:shadow-[0_26px_58px_-22px_rgba(213,168,90,0.3)]"

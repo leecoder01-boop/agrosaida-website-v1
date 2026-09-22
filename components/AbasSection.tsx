@@ -9,26 +9,26 @@ gsap.registerPlugin(ScrollTrigger);
 const CARDS = [
   {
     eyebrow: "01",
-    title: "[TÍTULO]",
-    desc: "[Descrição da prateleira — conteúdo real a ser fornecido pela Agrosaida. Foto real em breve.]",
+    title: "Saúde e cuidado animal",
+    desc: "Medicamentos veterinários, suplementos e itens essenciais para apoiar o bem-estar dos animais.",
     src: "/images/store/prateleira-medicamentos.png",
   },
   {
     eyebrow: "02",
-    title: "[TÍTULO]",
-    desc: "[Descrição da prateleira — conteúdo real a ser fornecido pela Agrosaida. Foto real em breve.]",
+    title: "Nutrição e trabalho no campo",
+    desc: "Rações selecionadas e ferramentas práticas para facilitar a rotina da propriedade.",
     src: "/images/store/racoes-e-ferramentas.png",
   },
   {
     eyebrow: "03",
-    title: "[TÍTULO]",
-    desc: "[Descrição da prateleira — conteúdo real a ser fornecido pela Agrosaida. Foto real em breve.]",
+    title: "Rações para cada necessidade",
+    desc: "Opções para diferentes espécies, portes e fases, com atendimento para ajudar na escolha.",
     src: "/images/store/racoes-a-granel.png",
   },
   {
     eyebrow: "04",
-    title: "[TÍTULO]",
-    desc: "[Descrição da prateleira — conteúdo real a ser fornecido pela Agrosaida. Foto real em breve.]",
+    title: "Acessórios e utilidades",
+    desc: "Produtos para manejo, manutenção e organização, reunidos para o dia a dia rural.",
     src: "/images/store/acessorios-e-utilidades.png",
   },
 ];
@@ -85,14 +85,6 @@ export default function AbasSection() {
       />
       <div className="absolute inset-0 -z-20 bg-[linear-gradient(105deg,rgba(2,10,6,0.90)_0%,rgba(7,27,16,0.78)_52%,rgba(2,11,7,0.58)_100%)] md:bg-[linear-gradient(105deg,rgba(2,10,6,0.82)_0%,rgba(7,27,16,0.68)_52%,rgba(2,11,7,0.42)_100%)]" aria-hidden="true" />
       <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(3,14,8,0.10),rgba(3,14,8,0.38))]" aria-hidden="true" />
-      {/* foto da fachada Agrosaida — canto inferior esquerdo, sem cobrir o trator */}
-      <img
-        src="/images/about/agrosaida-fachada.webp"
-        alt="Fachada da loja Agrosaida"
-        aria-hidden="true"
-        className="pointer-events-none absolute top-[28%] left-4 z-10 w-[180px] max-w-[38vw] rounded-2xl border border-white/10 object-cover shadow-[0_18px_48px_-18px_rgba(0,0,0,0.85)] opacity-90 sm:w-[220px] md:top-[32%] md:w-[260px] lg:left-10 lg:w-[300px]"
-        loading="lazy"
-      />
       <div className="relative mx-auto max-w-7xl">
         <div className="mb-10 max-w-2xl md:mb-14">
           <span className="abas-title eyebrow text-[#d5a85a]">MINI CATÁLOGO</span>
